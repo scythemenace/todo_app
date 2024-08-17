@@ -1,9 +1,20 @@
-export function Todos() {
+export function Todos(props) {
   return (
     <>
-      <h1>Go to gym</h1>
-      <h2>You need to go to the gym</h2>
-      <button>Mark as completed</button>
+      {
+        // eslint-disable-next-line react/prop-types
+        props.todos.map((todo) => {
+          return (
+            <>
+              <h1>{todo.title}</h1>
+              <h2>{todo.description}</h2>
+              <button>
+                {todo.completed ? "Completed" : "Mark as Complete"}
+              </button>
+            </>
+          );
+        })
+      }
     </>
   );
 }
