@@ -1,12 +1,17 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { CreateTodo } from "./components/CreateTodo.jsx";
+import { Todos } from "./components/Todos.jsx";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <></>;
+  return (
+    <>
+      <CreateTodo></CreateTodo>
+      {/*Here we have to render the todos here. Here we need a little bit of state management.
+      we'll do this in a separate file*/}
+      <Todos></Todos>
+    </>
+  );
 }
 
 export default App;
