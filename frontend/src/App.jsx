@@ -10,6 +10,9 @@ function App() {
     const data = await unparsedData.json();
     setTodos(data);
   });
+  /*Technically apart from CORS the above way is a bad way to do it, in the case our backend got overwhelemed, we
+   can notice in our networks tab that a new request gets called out every time our component gets reloaded 
+   and it kind of sends a very high number of requests whenever each time */
   /*
     Doing the above fetch syntax without having proper permissions from the backend will give us 
     CORS error which basically means that a different frontend url cannot be allowed
