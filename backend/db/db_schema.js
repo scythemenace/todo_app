@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const mongoDBUri = require("./mongoDBUri.js");
 
-mongoose.connect(
-  "mongodb+srv://pankur216:L4oqQ2mG1SdZ5k72@cluster0.goqdl4x.mongodb.net/todo_app?retryWrites=true&w=majority&appName=Cluster0",
-);
+console.log(mongoDBUri);
+
+mongoose.connect(mongoDBUri);
 
 const todoSchema = new mongoose.Schema({
   title: String,
