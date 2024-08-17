@@ -23,12 +23,12 @@ app.post("/todo", async (req, res) => {
   });
 
   res.status(200).json({
-    message: `Created a todo item ${todo_item}`,
+    message: `Created a todo item`,
   });
 });
 
 app.get("/todos", async (req, res) => {
-  const allTodos = await Todo.findOne({});
+  const allTodos = await Todo.find({});
   res.status(200).json(allTodos);
 });
 
@@ -43,7 +43,7 @@ app.put("/completed", async (req, res) => {
   }
 
   const updateId = updatedPayload.id;
-  await Todo.update(
+  await Todo.updateOne(
     {
       _id: updateId,
     },

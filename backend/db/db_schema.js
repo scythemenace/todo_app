@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const mongoDBUri = require("./mongoDBUri.js");
 
-console.log(mongoDBUri);
-
 mongoose.connect(mongoDBUri);
 
 const todoSchema = new mongoose.Schema({
