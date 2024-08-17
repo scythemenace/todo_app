@@ -7,8 +7,8 @@ const port = 3000;
 app.use(express.json());
 
 app.post("/todo", async (req, res) => {
-  const payload = req.body;
-  const parsedPayload = createTodo.safeParse(payload);
+  const createPayload = req.body;
+  const parsedPayload = createTodo.safeParse(createPayload);
   if (!parsedPayload.success) {
     res.status(411).json({
       message: "Wrong input types",
@@ -16,29 +16,45 @@ app.post("/todo", async (req, res) => {
     return;
   }
 
-  const todo_item = new Todo({
-    title: parsedPayload.title,
-    description: parsedPayload.description,
+  await Todo.create({
+    title: createPayload.title,
+    description: createPayload.description,
+    completed: false,
   });
-
-  await todo_item.save();
 
   res.status(200).json({
     message: `Created a todo item ${todo_item}`,
   });
 });
 
-app.get("/todos", (req, res) => {});
+app.get("/todos", async (req, res) => {
+  const allTodos = await Todo.findOne({});
+  res.status(200).json(allTodos);
+});
 
 app.put("/completed", async (req, res) => {
   const updatedPayload = req.body;
   const parsedPayload = updateTodo.safeParse(updatedPayload);
   if (!parsedPayload.success) {
     res.status(411).json({
-      message: "Wrong id's",
+      message: "Wrong id",
     });
     return;
   }
+
+  const updateId = updatedPayload.id;
+  await Todo.update(
+    {
+      _id: updateId,
+    },
+    {
+      completed: true,
+    },
+  );
+
+  res.json({
+    message: "Completed todo",
+  });
 });
 
 app.listen(port, () => {
